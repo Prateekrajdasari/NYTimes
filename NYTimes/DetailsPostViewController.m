@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,10 +42,16 @@
     }
     
     imagesArray = (NSArray *)self.mediaDictionary[@"media-metadata"];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
     [self.tableView reloadData];
 }
-
 
 #pragma mark - TableView DataScource
 
@@ -60,27 +67,27 @@
     cell.tag = indexPath.row;
     
     UIImageView *imageView = [cell.contentView viewWithTag:111];
-   
+    
     imageView.image = [UIImage imageNamed:@"image.png"];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^(void) {
         
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self->imagesArray[indexPath.row][@"url"]]];
+        NSString *imageURLString = self->imagesArray[indexPath.row][@"url"];
+       
+            NSURL *imageURL = [NSURL URLWithString:imageURLString];
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            
+            UIImage* image = [[UIImage alloc] initWithData:imageData];
+            if (image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    imageView.image = image;
+                });
+            }
         
-                             UIImage* image = [[UIImage alloc] initWithData:imageData];
-                             if (image) {
-                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                     
-                                     if (cell.tag == indexPath.row) {
-                                         
-                                         UIImageView *imageView = [cell.contentView viewWithTag:111];
-                                         imageView.image = image;
-                                     }
-                                 });
-                             }
-                             });
-    
+    });
     return cell;
 }
 
