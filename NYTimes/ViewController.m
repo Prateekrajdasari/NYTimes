@@ -22,6 +22,7 @@
     DetailsPostViewController *detailsPostViewController;
 }
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITableView *postsTableView;
 
 @end
@@ -31,6 +32,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [self.activityIndicator setHidden: NO];
+    [self.activityIndicator startAnimating];
     
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -44,7 +48,8 @@
         if ([response isKindOfClass:[NSArray class]]) {
 
             self->dataArray = (NSArray *)response;
-            
+            [self.activityIndicator setHidden: YES];
+            [self.activityIndicator stopAnimating];
             [self.postsTableView reloadData];
         }
     }];
@@ -99,8 +104,6 @@
         
         [self.navigationController pushViewController:detailsPostViewController animated:YES];
     }
-    
-    
 }
 
 @end

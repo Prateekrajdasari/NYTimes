@@ -8,13 +8,17 @@
 
 #import "DetailsPostViewController.h"
 
-@interface DetailsPostViewController () <UITableViewDataSource, UITableViewDelegate> {
+@interface DetailsPostViewController () {
     
     NSArray *imagesArray;
+    NSSortDescriptor *sortDescriptor;
+    NSOperationQueue *operationQueue;
+    NSBlockOperation *operation;
 }
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *postImage;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation DetailsPostViewController
@@ -23,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    operationQueue = [[NSOperationQueue alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,6 +39,26 @@
     
     [super viewWillAppear:animated];
     
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    [self.postImage setImage:[UIImage imageNamed:@"image"]];    //Setting the image in the detials view back to its default state.
+    
+    [self loadTheViewWithNewData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    if (!operation.isFinished) {    //removing the unfinished operation from the queue.
+        [operation cancel];
+        operation = nil;
+    }
+    
+    [self.postImage setImage:[UIImage imageNamed:@"image"]];
+}
+
+- (void)loadTheViewWithNewData {
+    
     if (self.mediaDictionary[@"caption"] == nil || self.mediaDictionary[@"caption"] == [NSNull null]) {
         self.captionLabel.hidden = YES;
     } else {
@@ -42,60 +67,36 @@
     }
     
     imagesArray = (NSArray *)self.mediaDictionary[@"media-metadata"];
-}
-
--(void)viewDidAppear:(BOOL)animated {
     
-    [super viewDidAppear:animated];
+    sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"height" ascending:NO];
     
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    imagesArray = [imagesArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
-    [self.tableView reloadData];
-}
-
-#pragma mark - TableView DataScource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSString *imageURLString = [imagesArray[0] valueForKey:@"url"];     //Filtering out the highest resolution image available in the set of images.
     
-    return imagesArray.count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //Putting the downloading part of the image in the background.
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photocell"];
-    
-    cell.tag = indexPath.row;
-    
-    UIImageView *imageView = [cell.contentView viewWithTag:111];
-    
-    imageView.image = [UIImage imageNamed:@"image.png"];
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    dispatch_async(queue, ^(void) {
+    operation = [NSBlockOperation blockOperationWithBlock:^{
         
-        NSString *imageURLString = self->imagesArray[indexPath.row][@"url"];
-       
-            NSURL *imageURL = [NSURL URLWithString:imageURLString];
-            
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            
-            UIImage* image = [[UIImage alloc] initWithData:imageData];
-            if (image) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    imageView.image = image;
-                });
-            }
+        NSURL *imageURL = [NSURL URLWithString:imageURLString];
         
-    });
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        UIImage* image = [[UIImage alloc] initWithData:imageData];
+        
+        if (image) {
+            dispatch_async(dispatch_get_main_queue(), ^{        //Invoking the main queue so as to implement the UI changes.
+                
+                self.postImage.image = image;
+                
+                [self.activityIndicator setHidden:YES];
+                [self.activityIndicator stopAnimating];
+            });
+        }
+    }];
     
-    return 200;
+    [operationQueue addOperation:operation];
 }
-
 
 
 @end
