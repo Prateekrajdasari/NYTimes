@@ -8,6 +8,10 @@
 
 #import "ServiceManager.h"
 
+#define APIKEY @"869d4e276804463b8b139a47809a8e4f"
+
+#define ENDPOINTURL @"http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key="
+
 static ServiceManager *sharedInstance = nil;
 
 @implementation ServiceManager
@@ -28,7 +32,7 @@ static ServiceManager *sharedInstance = nil;
 
 -(void)getDataFromServerwithCompletionBlock:(void (^)(id, NSError *))block {
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key=869d4e276804463b8b139a47809a8e4f"]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ENDPOINTURL,APIKEY]]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:10.0];
     [request setHTTPMethod:@"GET"];
@@ -44,84 +48,21 @@ static ServiceManager *sharedInstance = nil;
                                                         if (block)
                                                             block (nil, error);
                                                     } else {
-                                                       
+                                                        
                                                         NSJSONSerialization *responseJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                         
                                                         NSArray *resultsArray = [(NSDictionary *)responseJson valueForKey:@"results"];
-
-                                                       NSLog(@"%@", resultsArray);
-
+                                                        
+                                                        NSLog(@"%@", resultsArray);
+                                                        
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             
                                                             if (block)
                                                                 block (resultsArray, nil);
                                                         });
-                                                        
-                                                        
-                                                        
                                                     }
                                                 }];
     [dataTask resume];
 }
 
-
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

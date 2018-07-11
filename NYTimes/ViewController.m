@@ -23,7 +23,6 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UITableView *postsTableView;
 
 @end
 
@@ -54,13 +53,6 @@
         }
     }];
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 #pragma mark - TableView DataScource
 
@@ -104,6 +96,11 @@
         
         [self.navigationController pushViewController:detailsPostViewController animated:YES];
     }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 120;
 }
 
 @end
