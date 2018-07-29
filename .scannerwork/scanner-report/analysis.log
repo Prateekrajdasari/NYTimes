@@ -1,0 +1,117 @@
+Environment variables:
+  - Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.9OiaiLICrl/Render
+  - HOME=/Users/prateekraj
+  - JAVA_ARCH=x86_64
+  - JAVA_MAIN_CLASS_55137=org.sonarsource.scanner.cli.Main
+  - LC_CTYPE=UTF-8
+  - LOGNAME=prateekraj
+  - PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  - PWD=/Users/prateekraj/Desktop/Projects/Samples/NYTimes
+  - SHELL=/bin/bash
+  - SHLVL=1
+  - SONAR_SCANNER_HOME=/usr/local/Cellar/sonar-scanner/3.2.0.1227/libexec
+  - SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.RwSVJwsQPQ/Listeners
+  - TERM=xterm-256color
+  - TERM_PROGRAM=Apple_Terminal
+  - TERM_PROGRAM_VERSION=404
+  - TERM_SESSION_ID=27A71F96-E1E5-4404-915A-1B429F92FE6C
+  - TMPDIR=/var/folders/64/1bnvw8ds3c7dhm838p667nw40000gn/T/
+  - USER=prateekraj
+  - XPC_FLAGS=0x0
+  - XPC_SERVICE_NAME=0
+  - __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+  - com.apple.java.jvmTask=CommandLine
+System properties:
+  - awt.toolkit=sun.lwawt.macosx.LWCToolkit
+  - file.encoding=UTF-8
+  - file.encoding.pkg=sun.io
+  - file.separator=/
+  - ftp.nonProxyHosts=local|*.local|169.254/16|*.169.254/16
+  - gopherProxySet=false
+  - http.nonProxyHosts=local|*.local|169.254/16|*.169.254/16
+  - java.awt.graphicsenv=sun.awt.CGraphicsEnvironment
+  - java.awt.headless=true
+  - java.awt.printerjob=sun.lwawt.macosx.CPrinterJob
+  - java.class.path=/usr/local/Cellar/sonar-scanner/3.2.0.1227/libexec/lib/sonar-scanner-cli-3.2.0.1227.jar
+  - java.class.version=54.0
+  - java.home=/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home
+  - java.io.tmpdir=/var/folders/64/1bnvw8ds3c7dhm838p667nw40000gn/T/
+  - java.library.path=/Users/prateekraj/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+  - java.runtime.name=Java(TM) SE Runtime Environment
+  - java.runtime.version=10.0.2+13
+  - java.specification.name=Java Platform API Specification
+  - java.specification.vendor=Oracle Corporation
+  - java.specification.version=10
+  - java.vendor=Oracle Corporation
+  - java.vendor.url=http://java.oracle.com/
+  - java.vendor.url.bug=http://bugreport.java.com/bugreport/
+  - java.vendor.version=18.3
+  - java.version=10.0.2
+  - java.version.date=2018-07-17
+  - java.vm.compressedOopsMode=Zero based
+  - java.vm.info=mixed mode
+  - java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+  - java.vm.specification.name=Java Virtual Machine Specification
+  - java.vm.specification.vendor=Oracle Corporation
+  - java.vm.specification.version=10
+  - java.vm.vendor="Oracle Corporation"
+  - java.vm.version=10.0.2+13
+  - jdk.debug=release
+  - line.separator=
+
+  - os.arch=x86_64
+  - os.name=Mac OS X
+  - os.version=10.13.6
+  - path.separator=:
+  - project.home=/Users/prateekraj/Desktop/Projects/Samples/NYTimes
+  - scanner.home=/usr/local/Cellar/sonar-scanner/3.2.0.1227/libexec
+  - socksNonProxyHosts=local|*.local|169.254/16|*.169.254/16
+  - sun.arch.data.model=64
+  - sun.boot.library.path=/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib
+  - sun.cpu.endian=little
+  - sun.cpu.isalist=
+  - sun.io.unicode.encoding=UnicodeBig
+  - sun.java.command=org.sonarsource.scanner.cli.Main -X
+  - sun.java.launcher=SUN_STANDARD
+  - sun.jnu.encoding=UTF-8
+  - sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+  - sun.os.patch.level=unknown
+  - user.country=IN
+  - user.dir=/Users/prateekraj/Desktop/Projects/Samples/NYTimes
+  - user.home=/Users/prateekraj
+  - user.language=en
+  - user.name=prateekraj
+  - user.timezone=Asia/Kolkata
+SonarQube plugins:
+  - SonarC# 7.2.0.5463 (csharp)
+  - SonarPython 1.10.0.2131 (python)
+  - SonarJava 5.4.0.14284 (java)
+  - LDAP 2.2.0.608 (ldap)
+  - Git 1.4.1.1128 (scmgit)
+  - SonarFlex 2.4.0.1222 (flex)
+  - SonarXML 1.5.1.1452 (xml)
+  - SonarGo 1.1.0.1612 (go)
+  - SonarPHP 2.13.0.3107 (php)
+  - SonarTS 1.7.0.2893 (typescript)
+  - Svn 1.7.0.1017 (scmsvn)
+Global properties:
+  - sonar.core.id=AWTfUldZwDtVUVneDdnH
+  - sonar.core.startTime=2018-07-28T20:56:29+0530
+Settings for module: NYTimes
+  - sonar.c.file.suffixes=
+  - sonar.cfamily.build-wrapper-output=DerivedData/compilation-database
+  - sonar.cfamily.llvm-cov.reportPath=DerivedData/coverage.txt
+  - sonar.host.url=http://localhost:9000
+  - sonar.language=objc
+  - sonar.objc.file.suffixes=.h,.m
+  - sonar.projectBaseDir=/Users/prateekraj/Desktop/Projects/Samples/NYTimes
+  - sonar.projectKey=NYTimes
+  - sonar.projectName=NYTimes
+  - sonar.projectVersion=1.0
+  - sonar.scanner.app=ScannerCli
+  - sonar.scanner.appVersion=3.2.0.1227
+  - sonar.sourceEncoding=UTF-8
+  - sonar.sources=NYTimes
+  - sonar.tests=NYTimesTests
+  - sonar.verbose=true
+  - sonar.working.directory=/Users/prateekraj/Desktop/Projects/Samples/NYTimes/.scannerwork
